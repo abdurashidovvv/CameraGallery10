@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.abdurashidov.cameragallery10.databinding.RvItemBinding
 import uz.abdurashidov.cameragallery10.models.User
 
-class RvAdapter(val list:List<User>): RecyclerView.Adapter<RvAdapter.Vh>(){
+class RvAdapter(val list: List<User>) : RecyclerView.Adapter<RvAdapter.Vh>() {
 
-    inner class Vh(var itemRv: RvItemBinding):RecyclerView.ViewHolder(itemRv.root){
-        fun onBind(user:User){
+    inner class Vh(var itemRv: RvItemBinding) : RecyclerView.ViewHolder(itemRv.root) {
+        fun onBind(user: User) {
             itemRv.image.setImageURI(Uri.parse(user.image))
-            itemRv.name.text=user.name
-            itemRv.surname.text=user.surname
+            itemRv.name.text = user.name
+            itemRv.surname.text = user.surname
         }
     }
 
@@ -29,8 +29,8 @@ class RvAdapter(val list:List<User>): RecyclerView.Adapter<RvAdapter.Vh>(){
         return list.size
     }
 
-    interface RvClick{
-        fun itemClick(text:String)
+    interface RvClick {
+        fun itemClick(text: String)
     }
 
 }

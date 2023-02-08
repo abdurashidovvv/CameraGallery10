@@ -13,6 +13,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import uz.abdurashidov.cameragallery10.BuildConfig
 import uz.abdurashidov.cameragallery10.databinding.FragmentAddUserBinding
+import uz.abdurashidov.cameragallery10.db.MyDbHelper
+import uz.abdurashidov.cameragallery10.models.User
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -25,11 +27,14 @@ class AddUserFragment : Fragment() {
     private val binding by lazy { FragmentAddUserBinding.inflate(layoutInflater) }
     lateinit var photoUri:Uri
     lateinit var currentImagePath: String
+    lateinit var myDbHelper: MyDbHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        myDbHelper= MyDbHelper(binding.root.context)
 
         binding.apply {
             image.setOnClickListener {
@@ -45,7 +50,12 @@ class AddUserFragment : Fragment() {
             }
 
             save.setOnClickListener {
-
+                val user=User(
+                    name = binding.name.text.toString(),
+                    surname = binding.surname.text.toString(),
+                    image = photoUri.toString()
+                )
+                myDbHelper.addUser(user)
             }
         }
 
